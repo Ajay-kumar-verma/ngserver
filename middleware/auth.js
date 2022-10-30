@@ -11,7 +11,7 @@ async function auth(req, res, next) {
        }
      else {
        const obj = { verificationFail: true, ...error }
-       res.status(408).send(obj);
+       res.send(obj);
      
       }
     }
