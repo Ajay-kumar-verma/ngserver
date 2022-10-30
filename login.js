@@ -36,7 +36,7 @@ router.route("/")
 		}
 
 	} catch (error) {
-		res.status(500).send(
+		res.send(
             { 
               login: false,
               msg: "Server error or invalid body data ",
