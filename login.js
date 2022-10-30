@@ -12,8 +12,6 @@ router.route("/")
 		const isThere = await users.findOne({ Email });
 		if (isThere) {
 		const isMatch = await bcrypt.compare(password, isThere.password);
-		res.send({data :req.body,isThere,isMatch});
-		return ;
 		const { token, error } = await genToken(user);
 		
 		if (isMatch) {
@@ -30,7 +28,7 @@ router.route("/")
 				res.status(202).send({ ...obj });
 			}
 			else {
-			res.status(404).send({ login: false, msg: "In correct Email or password  " });
+			res.send({ login: false, msg: "In correct Email or password  " });
 		}
 		}
 		else {
