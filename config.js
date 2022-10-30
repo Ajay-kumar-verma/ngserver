@@ -1,9 +1,10 @@
 require('dotenv').config();
-const mongoose = require('mongoose')
- const DB_NAME= 'Renix'
-//  const DB_NAME="Zmongoosoe";
-let url= process.env.DB_NAME;
-// let url=`mongodb+srv://tuitionwalah:TJ6qG21mvK0GTTmk@cluster0.ajnizva.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`; 
+const mongoose = require('mongoose');
+const DB_NAME= process.env.DB_NAME ||'ngdb';
+const USER = process.env.USER || "ajay";
+const PASSWORD = process.env.PASSWORD || "xEZBzx7gLWG93piZ";
+let url=
+`mongodb+srv://${USER}:${PASSWORD}@cluster0.2w2gbhf.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
 
 function initDB() {
     if(mongoose.connections[0].readyState){
@@ -13,15 +14,19 @@ function initDB() {
 
   mongoose.connect(url,{
     useNewUrlParser:true,
-    useUnifiedTopology:true
+    useUnifiedTopology:true,
 }) 
 mongoose.connection.on('connected',()=>{
-    console.log(`connected to mongo ${DB_NAME}`)
+      console.log(`connected to mongo ${DB_NAME}`)
 })
 mongoose.connection.on('error',(err)=>{
     console.log("server errorror",err)
 })
 
+
+
+console.log("init Db is called ");
 }
+
 initDB();
 module.exports=initDB;

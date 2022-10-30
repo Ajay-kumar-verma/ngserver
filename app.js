@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 
-router.use('/signup',require('./signup'))
+router.use('/user',require('./user'))
 router.use('/login',require('./login'))
 
 

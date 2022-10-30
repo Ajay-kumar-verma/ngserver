@@ -1,0 +1,40 @@
+###  user
+POST  http://localhost:3001/user
+Content-Type: application/json
+
+  {   
+    "FirstName":" Ajay",
+    "LastName":"sharma",
+    "ImageUrl":"https://www.ImageUrl.com",
+    "Email":"g.com",
+    "password" :"123456"
+ }
+
+
+### dd
+POST  http://localhost:3001/login
+Content-Type: application/json
+
+  {   
+    "FirstName":" Ajay",
+    "LastName":"sharma",
+    "ImageUrl":"https://www.ImageUrl.com",
+    "Email":"g.com",
+    "password" :"123456"
+ }
+
+
+###  user
+GET  http://localhost:3001/user
+Content-Type: application/json
+Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzVlNjZmNjI5MjcxNTE4YjkwODZjY2MiLCJGaXJzdE5hbWUiOiIgQWpheSIsIkxhc3ROYW1lIjoic2hhcm1hIiwiSW1hZ2VVcmwiOiJodHRwczovL3d3dy5JbWFnZVVybC5jb20iLCJFbWFpbCI6ImcuY29tIiwiX192IjowLCJpYXQiOjE2NjcxMzEyMzUsImV4cCI6MTY2NzE5MTIzNX0.h-EU_DNk-Z63uZfL-XMfLjrIa2Nj35rDh1gR4ayibkM"
+
+  {   
+    "FirstName":" Ajay",
+    "LastName":"sharma",
+    "ImageUrl":"https://www.ImageUrl.com",
+    "Email":"g.com",
+    "password" :"123456"
+ }
+
+
