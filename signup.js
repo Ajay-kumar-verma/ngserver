@@ -28,4 +28,10 @@ console.log(req.body);
   res.status(200).status("user deleted ");
 })
 
+router.all("*",async (req,res) =>{
+  console.log("Invalid url  "+req.url);
+   res.status(200).status("user deleted ");
+ })
+ 
+
 module.exports=router;
