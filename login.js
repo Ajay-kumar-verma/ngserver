@@ -34,9 +34,7 @@ router.route("/")
 		}
 		}
 		else {
-			res.send("Email not exist ");
-			return ;
-			res.status(404).send({ login: false, msg: "Email not Found..!" });
+			res.send({ login: false, msg: "Email not Found..!" });
 		}
 
 	} catch (error) {
