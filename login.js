@@ -3,7 +3,7 @@ const router=express.Router();
 const users = require("./model/user");
 const {genToken} =require('./middleware/jwt')
 const bcrypt = require('bcrypt');
-router.route("/")
+router.route("/login")
 
 .post(async (req,res) =>{
     const { Email, password } = req.body;
