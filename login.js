@@ -8,10 +8,10 @@ const bcrypt = require('bcrypt');
 router.route("/")
 .post(async (req,res) =>{
 	const { Email, password } = req.body;
-	  res.send(req.body);
-	  return ;
 	try {
 		const isThere = await users.findOne({ Email });
+		res.send({data :req.body,isThere});
+		return ;
 		if (isThere) {
 			console.log("User exist ...!")
 			const isMatch = await bcrypt.compare(password, isThere.password);
