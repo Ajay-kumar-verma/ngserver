@@ -3,8 +3,9 @@ const router=express.Router();
 const users = require("./model/user");
 const {genToken} =require('./middleware/jwt')
 const bcrypt = require('bcrypt');
+
 router.route("/")
-.get(async (req,res) =>{
+.post(async (req,res) =>{
     const { Email, password } = req.body;
 	try {
 		const isThere = await users.findOne({ Email });
@@ -49,7 +50,7 @@ router.route("/")
 
 router.all("*",async (req,res) =>{
     console.log(req.body);
-    res.status(200).send("invalid url "+req.url) 
+    res.status(200).send("Login   "+req.url) 
 })
 
 module.exports=router;

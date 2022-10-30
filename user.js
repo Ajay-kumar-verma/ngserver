@@ -57,7 +57,7 @@ router.route("/")
 
 
 router.all("*",async (req,res) =>{
-  console.log("Invalid url  "+req.url);
+  console.log("user   "+req.url);
    res.status(200).status("user deleted ");
  })
  
