@@ -1,8 +1,7 @@
 const {verifyToken } = require('./jwt');
 
 async function auth(req, res, next) {
-  const { authorization } = req?.headers;
-  const token = authorization?.slice(1, authorization?.length - 1);
+  const { token } = req.body;
     const { data, error } = await verifyToken(token);
     if (data) {
        req.user = { ...data }; 
