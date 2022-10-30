@@ -43,14 +43,14 @@ router.route("/")
          user: isThere._doc 
         });
     } else {
-      res.status(404).send(
+      res.send(
         { user: false,
           msg: "User  Not found..!"
         }
          );
     }
   } catch (error) {
-    res.status(204).send({ user: false, ...error, msg: "error", })
+    res.send({ user: false, ...error, msg: "error", })
   }
   
 })
