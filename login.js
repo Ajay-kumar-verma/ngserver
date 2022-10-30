@@ -10,12 +10,8 @@ router.route("/")
 	const { Email, password } = req.body;
 	try {
 		const isThere = await users.findOne({ Email });
-		res.send({data :req.body,isThere});
-		return ;
-		
 		if (isThere) {
-			console.log("User exist ...!")
-			const isMatch = await bcrypt.compare(password, isThere.password);
+		const isMatch = await bcrypt.compare(password, isThere.password);
 			 console.log(isMatch)
 			if (isMatch) {
 				console.log("password matched")
