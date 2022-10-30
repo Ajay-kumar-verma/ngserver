@@ -34,8 +34,8 @@ router.route("/")
 
 .get(async (req,res) =>{
   const { token } = req.body;
-   const {data} =await verifyToken(token);
   res.send(data); 
+   const {data} =await verifyToken(token);
 })
 
 
