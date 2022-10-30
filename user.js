@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const users = require("./model/user");
-
+const {verifyToken} = require("./middleware/jwt");
 router.route("/")
 .post(async (req,res) =>{
  
@@ -32,27 +32,10 @@ router.route("/")
 })
 
 
-.get(require('./middleware/auth').auth,async (req,res) =>{
-  const { _id,  } = req.user;
-  try {
-    const isThere = await users.findById({ _id });
-    if (isThere) {
-      delete isThere._doc['password'];
-      res.status(200).send(
-        { user: true, 
-         user: isThere._doc 
-        });
-    } else {
-      res.send(
-        { user: false,
-          msg: "User  Not found..!"
-        }
-         );
-    }
-  } catch (error) {
-    res.send({ user: false, ...error, msg: "error", })
-  }
-  
+.get(async (req,res) =>{
+  const { token } = req.user;
+   const {data} =await verifyToken(token);
+  res.send(data); 
 })
 
 
