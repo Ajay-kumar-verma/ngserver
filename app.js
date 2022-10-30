@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 
 router.get("/",(req,res) =>{
-    res.send("Server is running !");
+    res.send("Server is live now  !");
     // console.log("Server is running ")
 })
 
