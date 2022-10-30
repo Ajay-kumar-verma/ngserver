@@ -48,6 +48,29 @@ router.route("/")
 })
 
 
+.get(require('./middleware/auth').auth,async (req,res) =>{
+	const { _id,  } = req.user;
+	try {
+	  const isThere = await users.findById({ _id });
+	  if (isThere) {
+		delete isThere._doc['password'];
+		res.status(200).send(
+		  { user: true, 
+		   user: isThere._doc 
+		  });
+	  } else {
+		res.status(404).send(
+		  { user: false,
+			msg: "User  Not found..!"
+		  }
+		   );
+	  }
+	} catch (error) {
+	  res.status(204).send({ user: false, ...error, msg: "error", })
+	}
+	
+  })
+  
 
 
 
@@ -57,9 +80,7 @@ router.route("/")
 
 
 
-router.post("/login",async (req,res) =>{
-    
-})
+
 
 
 
