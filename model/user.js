@@ -15,19 +15,24 @@ async function hashPswd(plainText) {
 const usersSchema = new Schema({
     FirstName: {
         type: String,
+        required:true
     },
     LastName: {
         type: String,
+        required:true
     },
     ImageUrl: {
       type: String,
+      required:true
     }
    ,
     Email:{
-      type: String, 
+      type: String,
+      required:true 
     },
     password:{
         type:String,
+        required:true
        },    
   
 })
