@@ -23,8 +23,7 @@ const usersSchema = new Schema({
     },
     ImageUrl: {
       type: String,
-      required:true
-    }
+     }
    ,
     Email:{
       type: String,
