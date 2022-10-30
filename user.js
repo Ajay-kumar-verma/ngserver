@@ -8,9 +8,7 @@ router.route("/")
   const { Email } = req.body;
   try {
     const isThere = await users.findOne({ Email });
-   res.send({Email,isThere});
-   return ;
-    if (isThere) {
+   if (isThere) {
           isThere.password = undefined
       res.status(208).send({ accountCreated: false,
       msg: "user exist with email : " + Email, user: isThere });
