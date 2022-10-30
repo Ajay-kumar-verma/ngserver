@@ -4,6 +4,50 @@ const users = require("./model/user");
 const {genToken} =require('./middleware/jwt')
 const bcrypt = require('bcrypt');
 
+
+router.route("/")
+.post(async (req,res) =>{
+ 
+  const { Email } = req.body;
+  try {
+    const isThere = await users.findOne({ Email });
+    if (isThere) {
+          isThere.password = undefined
+      res.status(208).send({ accountCreated: false,
+      msg: "user exist with email : " + Email, user: isThere });
+      return;
+    }
+   let u = new users({ ...req.body });
+ try {
+  await u.save();
+  } catch (error) {
+  console.log(error)
+ }
+     
+    let user = u._doc;
+    delete user["password"];
+    res.status(201).send({ accountCreated: true, msg: "Account created ..!", user});
+  } catch (err) {
+    res.status(400).send({ accountCreated: false, 
+    msg: "account not created"+err});
+  }
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.post("/login",async (req,res) =>{
     const { Email, password } = req.body;
 	try {
