@@ -3,8 +3,7 @@ const router=express.Router();
 const users = require("./model/user");
 const {genToken} =require('./middleware/jwt')
 const bcrypt = require('bcrypt');
-router.route("/login")
-
+router.route("/")
 .post(async (req,res) =>{
     const { Email, password } = req.body;
 	try {
@@ -44,6 +43,10 @@ router.route("/login")
             );
 	}  
 
+})
+
+.get(async (req,res) =>{
+   res.status(200).send({msg: "Server is running ",url :req.url})
 })
 
 
