@@ -17,9 +17,9 @@ router.route("/")
 				console.log("password matched")
 				let user = isThere._doc;
 				delete user["password"];
-				const { token, error } = await genToken(user);
 				res.send({data :req.body,isThere,isMatch,user,token});
 				return ;
+				const { token, error } = await genToken(user);
 			
 				if (error) { res.status(500).send(
                     { 
