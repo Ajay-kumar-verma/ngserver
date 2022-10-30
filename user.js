@@ -18,7 +18,8 @@ router.route("/")
  try {
   await u.save();
   } catch (error) {
-  console.log(error)
+  res.send(error);
+  return;
  }
      
     let user = u._doc;
