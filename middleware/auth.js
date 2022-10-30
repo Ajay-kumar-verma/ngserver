@@ -3,8 +3,11 @@ const {verifyToken } = require('./jwt');
 async function auth(req, res, next) {
   const { token } = req.body;
     const { data, error } = await verifyToken(token);
+    res.send(data);
+    return ;
     if (data) {
-       req.user = { ...data }; 
+    
+     req.user = { ...data }; 
        next(); 
        return;
        }
