@@ -42,7 +42,7 @@ router.route("/")
             { 
               login: false,
               msg: "Server error or invalid body data ",
-              ...error 
+              error 
             }
             );
 	}  
