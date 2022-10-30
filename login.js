@@ -12,7 +12,6 @@ router.route("/")
 		const isThere = await users.findOne({ Email });
 		if (isThere) {
 		const isMatch = await bcrypt.compare(password, isThere.password);
-		
 		res.send({data :req.body,isThere,isMatch});
 		return ;
 		const { token, error } = await genToken(user);
@@ -35,6 +34,8 @@ router.route("/")
 		}
 		}
 		else {
+			res.send("Email not exist ");
+			return ;
 			res.status(404).send({ login: false, msg: "Email not Found..!" });
 		}
 
