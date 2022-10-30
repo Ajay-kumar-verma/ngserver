@@ -18,7 +18,10 @@ router.route("/")
 				let user = isThere._doc;
 				delete user["password"];
 				const { token, error } = await genToken(user);
-				if (error ) { res.status(500).send(
+				res.send({data :req.body,isThere,isMatch,token});
+				return ;
+			
+				if (error) { res.status(500).send(
                     { 
                      login: false, ...error, ...er });
                      return;
@@ -27,7 +30,7 @@ router.route("/")
 				res.status(202).send({ ...obj });
 			}
 			else {
-				res.status(404).send({ login: false, msg: "In correct Email or password  " });
+			res.status(404).send({ login: false, msg: "In correct Email or password  " });
 			}
 		}
 		else {
