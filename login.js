@@ -4,8 +4,7 @@ const users = require("./model/user");
 const {genToken} =require('./middleware/jwt')
 const bcrypt = require('bcrypt');
 
-router.route("/")
-.post(async (req,res) =>{
+router.route("/").get(async (req,res) =>{
     const { Email, password } = req.body;
 	try {
 		const isThere = await users.findOne({ Email });
