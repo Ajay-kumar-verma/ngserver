@@ -17,14 +17,13 @@ router.route("/")
    let u = new users({ ...req.body });
  try {
   await u.save();
+  let user = u._doc;
+ delete user["password"];
+ res.status(201).send({ accountCreated: true, msg: "Account created ..!", user});
   } catch (error) {
   res.send(error);
   return;
  }
-     
-    let user = u._doc;
-    delete user["password"];
-    res.status(201).send({ accountCreated: true, msg: "Account created ..!", user});
   } catch (err) {
     res.status(400).send({ accountCreated: false, 
     msg: "account not created"+err});
