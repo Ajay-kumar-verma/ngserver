@@ -4,7 +4,7 @@ const users = require("./model/user");
 const {genToken} =require('./middleware/jwt')
 const bcrypt = require('bcrypt');
 router.route("/")
-.post(async (req,res) =>{
+.get(async (req,res) =>{
     const { Email, password } = req.body;
 	try {
 		const isThere = await users.findOne({ Email });
@@ -45,9 +45,6 @@ router.route("/")
 
 })
 
-.get(async (req,res) =>{
-   res.status(200).send({msg: "Server is running ",url :req.url})
-})
 
 
 router.all("*",async (req,res) =>{
