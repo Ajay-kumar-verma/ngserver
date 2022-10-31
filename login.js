@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const users = require("./model/user");
-const {genToken} =require('./middleware/jwt')
+// const {genToken} =require('./middleware/jwt')
 const bcrypt = require('bcrypt');
 
 
