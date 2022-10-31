@@ -54,11 +54,11 @@ const login = () => {
 const user = () => {
    const Token =localStorage.getItem('Token');
     axios
-      .post('http://www.localhost:3001/user/info',{Token})
+      .post('http://www.localhost:3001/user/info',{ Token})
       .then(response => {
         console.log("response is :",response)
          })
       .catch(error => console.error("Error is :",error))
   }
 
-// user();
+user();

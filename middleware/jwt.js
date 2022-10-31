@@ -12,7 +12,7 @@ async function genToken(cred) {
 }
 
 async function verifyToken(token) {
-  console.log("token is :",token);
+  // console.log("token is :",token);
   try {
     const User = await jwt.verify(token, secret_key)
        console.log(User);

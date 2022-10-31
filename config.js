@@ -1,8 +1,8 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const DB_NAME= process.env.DB_NAME ||'ngdb';
-const USER = process.env.USER || "ajay";
-const PASSWORD = process.env.PASSWORD || "xEZBzx7gLWG93piZ";
+const USER = process.env.USER ;
+const PASSWORD = process.env.PASSWORD;
 let url=
 `mongodb+srv://${USER}:${PASSWORD}@cluster0.2w2gbhf.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
 
