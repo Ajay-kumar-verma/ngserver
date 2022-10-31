@@ -1,41 +1,58 @@
 const express=require('express');
 const router=express.Router();
 const users = require("./model/user");
-const {verifyToken} = require("./middleware/jwt");
-router.route("/")
+const {auth} =require('./middleware/auth');
+
+router.all("*",(req,res, next) =>{
+console.log("user api ",req.url);
+next();
+})
+
+
+router.route("/signup")
 .post(async (req,res) =>{
  
   const { Email } = req.body;
   try {
     const isThere = await users.findOne({ Email });
    if (isThere) {
-          isThere.password = undefined
+          isThere.Password = undefined
       res.status(208).send({ accountCreated: false,
-      msg: "user exist with email : " + Email, user: isThere });
+      message: "user exist with email : " + Email, user: isThere });
       return;
     }
-   let u = new users({ ...req.body });
+   let u = new users(req.body);
  try {
   await u.save();
   let user = u._doc;
- delete user["password"];
- res.status(201).send({ accountCreated: true, msg: "Account created ..!", user});
+  delete user['Password'];
+ res.status(201).send({ accountCreated: true, messaage: "Account created ..!",user});
   } catch (error) {
-  res.send(error);
+  res.send({ accountCreated: false, msg: "Account not created ..!",...error});
   return;
  }
   } catch (err) {
-    res.status(400).send({ accountCreated: false, 
-    msg: "account not created"+err});
+    res.send({ accountCreated: false, 
+    message: "account not created"+err});
   }
 
 })
 
+router.route("/info")
+.post(auth,async (req,res) =>{
+  const {_id}= req;
+   const user = await users.findOne({ _id });
+   if (user) {
+         user.Password = undefined
+     res.status(200).send({ recieved :true, user });
+     return;
+   }
+   else{
+    res.status(200).send({ recieved :true, message:"User not find " });
+   
+   }
 
-.get(async (req,res) =>{
-  const { token } = req.body;
-  res.send(token); 
-   const {data} =await verifyToken(token);
+
 })
 
 

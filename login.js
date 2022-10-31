@@ -1,37 +1,45 @@
 const express=require('express');
 const router=express.Router();
 const users = require("./model/user");
-// const {genToken} =require('./middleware/jwt')
+const {genToken} =require('./middleware/jwt')
 const bcrypt = require('bcrypt');
+
+
+router.all("*",(req,res, next) =>{
+	console.log("login api ",req.url);
+	next();
+})
 
 
 router.route("/")
 .post(async (req,res) =>{
-	const { Email, password } = req.body;
+	const { Email, Password } = req.body;
 	try {
-		const isThere = await users.findOne({ Email });
-		if (isThere) {
-		const isMatch = await bcrypt.compare(password, isThere.password);
+		let user = await users.findOne({ Email });
+		if (user) {
+		const isMatch = await bcrypt.compare(Password, user.Password);
 		if (isMatch) {
-				console.log("password matched")
-				let user = isThere._doc;
-				delete user["password"];
-				const obj = { login: true,msg: "login sucesfull...!", user }
-				res.status(202).send({ ...obj });
+		 user = user._doc;  delete user["Password"];
+          const {Token ,Error} = await genToken(user);
+		  const obj={};
+		  res.status(202).send(Token);
+		  if(Token) obj= {...obj, login: true,message: "login sucesfull...!", Token}
+		  if(Error) obj = {...obj,login:false,message:"Token generation error ",Error};	
 			}
+
 			else {
-			res.send({ login: false, msg: "In correct Email or password  " });
+			res.status(206).send({ login: false, message: "In correct Email or password  " });
 		}
 		}
 		else {
-			res.send({ login: false, msg: "Email not Found..!" });
+			res.status(206).send({ login: false, message: "Email not Found..!" });
 		}
 
 	} catch (error) {
 		res.send(
             { 
               login: false,
-              msg: "Server error or invalid body data ",
+              message: "Server error or invalid body data ",
               error 
             }
             );

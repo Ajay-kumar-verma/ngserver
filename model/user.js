@@ -29,7 +29,7 @@ const usersSchema = new Schema({
       type: String,
       required:true 
     },
-    password:{
+    Password:{
         type:String,
         required:true
        },    
@@ -38,9 +38,10 @@ const usersSchema = new Schema({
 
 
 usersSchema.pre("save", async function(next){
-  const plainText=this.password;  
+  // console.log("Pre save is catch"); 
+  const plainText=this.Password;  
   const hspswd=await hashPswd(plainText);   
-  this.password=hspswd;
+  this.Password=hspswd;
 //  console.log("pre save ",this);
   next();
 })

@@ -1,23 +1,23 @@
 const {verifyToken } = require('./jwt');
 
 async function auth(req, res, next) {
-  const { token } = req.body;
-    //  res.send(token);return ;
-    const { data, error } = await verifyToken(token);
-    res.send(data);
-    return ;
-    if (data) {
+  const  {Token}  = req.body;
+
+  // console.log("Token ",Token);
+
+  const { User, Error } = await verifyToken(Token);
     
-     req.user = { ...data }; 
-       next(); 
-       return;
-       }
-     else {
-       const obj = { verificationFail: true, ...error }
-       res.send(obj);
-     
-      }
+    if(User){
+      req.user = User;
+      req._id=User._id;
+      next();
+      return;
     }
-   
+    if(Error){
+      res.send({ TokenVerificationFail: true,Error});
+      return ;
+    }
+
+}
 
 module.exports = { auth };

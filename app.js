@@ -1,6 +1,12 @@
 const express=require('express');
 const router=express.Router();
 
+router.all("*",(req,res,next) =>{
+ console.log("Api is called with ",req.url);
+
+    next();
+})
+
 router.use('/login',require('./login'))
 router.use('/user',require('./user'))
 

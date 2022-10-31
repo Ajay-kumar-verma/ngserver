@@ -3,25 +3,25 @@ const secret_key = "12345"
 
 async function genToken(cred) {
   try {
-    const token = await jwt.sign({ ...cred }, secret_key, { expiresIn: '60000s' })
-
-    return { token };
-  } catch (error) {
-    return { error };
+    const Token = await jwt.sign({ ...cred }, secret_key, { expiresIn: '60000s' })
+    return { Token };
+  } catch (Error) {
+    return { Error };
   }
 
 }
 
 async function verifyToken(token) {
+  console.log("token is :",token);
   try {
-    const data = await jwt.verify(token, secret_key)
-    return { data };
-  } catch (error) {
-    return { error };
+    const User = await jwt.verify(token, secret_key)
+       console.log(User);
+    return {User };
+  } catch (Error) {
+    return { Error };
   }
 
 }
-
 
 
 
