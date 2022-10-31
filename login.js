@@ -12,19 +12,11 @@ router.route("/")
 		const isThere = await users.findOne({ Email });
 		if (isThere) {
 		const isMatch = await bcrypt.compare(password, isThere.password);
-		
 		if (isMatch) {
 				console.log("password matched")
 				let user = isThere._doc;
 				delete user["password"];
-				
-			const { token, error } = await genToken(user);
-				if (error) { res.status(500).send(
-                    { 
-                     login: false, ...error, ...er });
-                     return;
-                     }
-				const obj = { login: true, token, msg: "login sucesfull...!", user }
+				const obj = { login: true,msg: "login sucesfull...!", user }
 				res.status(202).send({ ...obj });
 			}
 			else {

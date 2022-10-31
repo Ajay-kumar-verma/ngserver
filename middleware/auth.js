@@ -2,7 +2,7 @@ const {verifyToken } = require('./jwt');
 
 async function auth(req, res, next) {
   const { token } = req.body;
-     res.send(token);return ;
+    //  res.send(token);return ;
     const { data, error } = await verifyToken(token);
     res.send(data);
     return ;
