@@ -1,5 +1,7 @@
 console.log("script is running ");
 
+const URL = "http://ngserver.herokuapp.com";
+
 const fetchUsers = () => {
     axios
       .get('https://reqres.in/api/users')
@@ -16,7 +18,7 @@ const fetchUsers = () => {
 
 const signUp = () => {
     axios
-      .post('http://www.localhost:3001/user',{
+      .post(`${URL}/user`,{
         FirstName:"Ajay shanme ",
         LastName:"soni",
         Email:"gss.com",
@@ -35,7 +37,7 @@ const signUp = () => {
 
 const login = () => {
     axios
-      .post('http://www.localhost:3001/login',{
+      .post(`${URL}/login`,{
         Email:"gss.com",
         Password:"12345" 
     })
@@ -50,11 +52,10 @@ const login = () => {
 // login();
 
 
-
 const user = () => {
    const Token =localStorage.getItem('Token');
     axios
-      .post('http://www.localhost:3001/user/info',{ Token})
+      .post(`${URL}/user/info`,{ Token})
       .then(response => {
         console.log("response is :",response)
          })
